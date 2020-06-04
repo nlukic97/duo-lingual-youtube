@@ -32,6 +32,10 @@ export default {
               {
                 title:'24H MENJAM AUTO SA CHODOM ! * udario kontejner *',
                 id:'4i5spo6-ogk'
+              },
+              {
+                title:'Sinan Sakic - Trezan - (Audio 2002)',
+                id:'Jnhqes1Iv2s'
               }
             ]
       },
@@ -43,6 +47,14 @@ export default {
         listOfVideos: {
           en: 'List of videos',
           sr: 'Lista klipova'
+        },
+        description:{
+          en: 'Description',
+          sr: 'Opis'
+        },
+        uploadDate:{
+          en: 'Upload date',
+          sr:'Datum postavljanja'
         }
       }
     }
