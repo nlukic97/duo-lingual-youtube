@@ -1,6 +1,22 @@
 <template>
   <div>
+    <button v-on:click="setLang('rs')">Serbian</button>
+    <button v-on:click="setLang('en')">English</button>
+    <h1>{{translations.mainHeading[this.lang]}} ({{$route.params.lang}})</h1>
 
+    <h2>{{translations.listOfVideos[this.lang]}}</h2>
+
+    <ul>
+      <li v-for="(video, index) in videos[this.lang]" v-bind:key="index">
+        <img v-on:click="toggleModal(video.id)" v-bind:src="generateThumbnailUrl(video.id)" alt="">
+        <h3 v-on:click="toggleModal(video.id)">
+          {{video.title}}
+        </h3>
+      </li>
+    </ul>
+    <div v-show="showModal" v-on:click="toggleModal" id="modal">
+      <iframe width="560" height="315" v-bind:src="embedVideo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
   </div>
 </template>
 <script>
@@ -8,6 +24,9 @@ export default {
   name: 'Videos',
   data() {
     return {
+      lang:'rs',
+      showModal:false,
+      embedVideo:null,
       videos: {
         en:[ 
             {
@@ -42,22 +61,110 @@ export default {
       translations: {
         mainHeading: {
           en: 'Welcome to duo-lingual-youtube',
-          sr: 'Dobro dosli na dvojezicni youtube'
+          rs: 'Dobro dosli na dvojezicni youtube'
         },
         listOfVideos: {
           en: 'List of videos',
-          sr: 'Lista klipova'
+          rs: 'Lista klipova'
         },
         description:{
           en: 'Description',
-          sr: 'Opis'
+          rs: 'Opis'
         },
         uploadDate:{
           en: 'Upload date',
-          sr:'Datum postavljanja'
+          rs:'Datum postavljanja'
+        }
+      },
+      translation2:{
+        en:{
+          mainHeading:'Welcome to duo-lingual-youtube',
+          listOfVideos:'List of videos'
+        },
+        rs:{
+          mainHeading:'Dobro dosli na dvojezicni youtube',
+          listOfVideos:'Lista klipova'
         }
       }
+    }
+  },
+  methods: {
+    /**
+     * Expects an argument that is either a youtube URL or a ID,
+     * and returns back the ID.
+     */
+    getIdFromUrl: function(videoIdOrUrl) {
+          if (videoIdOrUrl.indexOf('http') === 0) {
+              return videoIdOrUrl.split('v=')[1];
+          } else {
+              return videoIdOrUrl;
+          }
+    },
+    
+    /**
+       * Expects an argument that is either a youtube URL or a ID,
+       * and returns back the URL of the thumbnail for that video.
+       */
+    generateThumbnailUrl: function(videoIdOrUrl) {
+        return 'https://i3.ytimg.com/vi/' + this.getIdFromUrl(videoIdOrUrl) + '/default.jpg';
+    },
+
+    /**
+       * Expects an argument that is either a youtube URL or a ID,
+       * and returns back the URL for that video.
+       */
+    generateWatchUrl: function(videoIdOrUrl) {
+          return 'https://www.youtube.com/watch?v=' + this.getIdFromUrl(videoIdOrUrl);
+    },
+      
+    /**
+       * Expects an argument that is either a youtube URL or a ID,
+       * and returns back the embed URL for that video.
+       */
+    generateEmbedUrl: function(videoIdOrUrl) {
+        return 'https://www.youtube.com/embed/' + this.getIdFromUrl(videoIdOrUrl);
+    },
+    toggleModal(videoIdOrUrl) { //moze a i ne mora da prihvati parametar
+      if(this.showModal == false){
+        this.embedVideo = this.generateEmbedUrl(videoIdOrUrl)
+        this.showModal = true;
+      } else {
+        this.showModal = false;
+        this.embedVideo = null;
+      }
+    },
+
+    setLang(inputLang){
+      this.lang = inputLang;
+      // console.log(this.lang)
     }
   }
 }
 </script>
+<style lang="scss">
+  ul {
+    padding:0;
+    list-style: none;
+    width: 600px;
+    text-align: left;
+    margin:0 auto;
+    img {
+      max-width: 100%;
+    }
+    li {
+      border:1px solid rgb(200, 195, 195);
+      margin:20px 0;
+    }
+  }
+  #modal {
+    position:fixed;
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    background-color:rgba(0,0,0,0.4);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>

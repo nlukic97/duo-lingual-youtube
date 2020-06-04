@@ -12,7 +12,7 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path:'/:lang/videos',
+    path:'/:lang/videos', //jezik. ovo :lang salje info. zavisi od url
     name: 'Videos',
     component: Videos
   }
