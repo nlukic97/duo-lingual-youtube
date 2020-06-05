@@ -2,7 +2,7 @@
   <div>
     <button v-on:click="setLang('rs')">Serbian</button>
     <button v-on:click="setLang('en')">English</button>
-    <h1>{{translations.mainHeading[this.lang]}} ({{$route.params.lang}})</h1> <!-- paste this in the square brackets: $route.params.lang -->
+    <h1>{{translations.mainHeading[this.lang]}} ({{$route.params.lang}})</h1> <!-- paste this in the square brackets - - >    $route.params.lang    -->
 
     <h2>{{translations.listOfVideos[this.lang]}}</h2> <!-- varijabla ako dodajes ide ovako [this.lang]
     kad izvlacis iz data da pokazuje na putanju -->
