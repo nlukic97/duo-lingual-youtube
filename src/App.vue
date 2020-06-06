@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <div id="nav">
+      <h2>Select your language</h2>
       <router-link to="/rs/videos">Videos RS</router-link> &nbsp;
-      <!-- <router-link to="/en/videos">Videos EN</router-link> &nbsp; -->
-      <router-link to="/">Home</router-link> 
+      <router-link to="/en/videos">Videos EN</router-link> &nbsp;
+      <!-- <router-link to="/">Home</router-link>  -->
     </div>
-    <router-view/>
+    <router-view v-bind:key="$route.fullPath"></router-view>
+    
   </div>
 </template>
 
