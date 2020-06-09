@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import AgCookie from './cookie' //ubaci ovo
+import AgCookie from './cookie' //ubaci ovo, uvezes ovu funkciju
 
 Vue.config.productionTip = false
 Vue.prototype.$cookie = AgCookie //pozvali smo 

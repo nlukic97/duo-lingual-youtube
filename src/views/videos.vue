@@ -27,6 +27,7 @@ export default {
       lang:this.$route.params.lang,
       showModal:false,
       embedVideo:null,
+      cookieObj:null,
       videos: {
         en:[ 
             {
@@ -135,7 +136,9 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$cookie) //importovao si na pocetku koda. Modul si napravio
+    //console.log(this.$cookie) //importovao si na pocetku koda. Modul si napravio#
+    this.cookieObj = new this.$cookie;
+    this.cookieObj.create('language',this.lang,10);
   }
 }
 </script>
