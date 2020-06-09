@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Videos from '../views/videos.vue'
+import Videos from '../views/Videos.vue'
 
 Vue.use(VueRouter)
 

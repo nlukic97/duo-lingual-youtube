@@ -133,6 +133,9 @@ export default {
         this.embedVideo = null;
       }
     }
+  },
+  mounted(){
+    console.log(this.$cookie) //importovao si na pocetku koda. Modul si napravio
   }
 }
 </script>

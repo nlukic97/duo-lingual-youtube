@@ -5,8 +5,10 @@
 
 <script>
 // @ is an alias to /src
-
 export default {
-  name: 'Home'
+  name: 'Home',
+  mounted(){
+    console.log(this.$cookie);
+  }
 }
 </script>
